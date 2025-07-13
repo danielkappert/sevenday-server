@@ -1,0 +1,21 @@
+name: placeholder
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  gradle-test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "stub gradle tests"          # produces success
+
+  mockbukkit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "stub mockbukkit tests"
+
+  docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "stub docker build"
