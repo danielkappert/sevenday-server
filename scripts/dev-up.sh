@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+export COMPOSE_FILE=docker/compose.yml
+
 # 1. Compile the shaded plugin JAR
 ./gradlew :plugins:claimstone:shadowJar
 

@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   velocity:
     build: ./velocity
@@ -7,8 +5,7 @@ services:
     ports:
       - "25565:25577"          # public port → Velocity default
     volumes:
-      - ./data/velocity/plugins:/server/plugins
-      - ./data/velocity/config:/server          # toml files
+      - ./data/velocity:/server          # toml files
     restart: unless-stopped
 
   paper:
