@@ -1,0 +1,47 @@
+version: "3.9"
+
+services:
+  velocity:
+    build: ./velocity
+    container_name: velocity
+    ports:
+      - "25565:25577"          # public port → Velocity default
+    volumes:
+      - ./data/velocity/plugins:/server/plugins
+      - ./data/velocity/config:/server          # toml files
+    restart: unless-stopped
+
+  paper:
+    build: ./paper
+    container_name: paper
+    depends_on:
+      - mariadb
+      - redis
+    ports:
+      - "25566:25565"          # internal testing; Velocity will connect on 25566
+    volumes:
+      - ./data/paper/plugins:/server/plugins
+      - ./data/paper/worlds:/server/worlds
+    environment:
+      VELOCITY_PORT: 25577     # we’ll read this in paper.yml later
+    restart: unless-stopped
+
+  mariadb:
+    image: mariadb:11
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: sevenday
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    restart: unless-stopped
+
+  redis:
+    image: redis:7
+    command: ["redis-server","--appendonly","yes"]
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+
+volumes:
+  mariadb-data:
+  redis-data:
