@@ -5,7 +5,7 @@ ARG MC_VERSION=1.21.7          # <- bump when Mojang bumps
 ARG USER_AGENT="sevendaybuild/0.1 (dev@sevendayserver.com)"
 # -----------------------------------------
 
-WORKDIR /server
+WORKDIR /opt/paper
 
 # --- grab curl + jq (5 MiB total) ---
 RUN apt-get update \
@@ -22,8 +22,11 @@ RUN set -eux; \
     curl -fSL -H "User-Agent: ${USER_AGENT}" \
       "https://api.papermc.io/v2/projects/paper/versions/${MC_VERSION}/builds/${BUILD_ID}/downloads/paper-${MC_VERSION}-${BUILD_ID}.jar" \
       -o paper.jar
-    
+
+WORKDIR /server
+VOLUME ["/server"]
+
 RUN echo "eula=true" > eula.txt
 
 EXPOSE 25565
-ENTRYPOINT ["java","-jar","paper.jar","--nogui"]
+ENTRYPOINT ["java","-jar","/opt/paper/paper.jar","--nogui"]

@@ -317,3 +317,5 @@ vite.config.ts.timestamp-*
 docker/data/
 
 *~
+
+data/paper/plugins/*.jar
