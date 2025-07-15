@@ -319,3 +319,5 @@ docker/data/
 *~
 
 data/paper/plugins/*.jar
+
+data/paper/plugins/spark/tmp-client/
