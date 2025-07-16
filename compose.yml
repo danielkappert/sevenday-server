@@ -4,7 +4,7 @@ services:
     build: ./docker/velocity
     container_name: velocity
     ports:
-      - "25565:25577"          # public port → Velocity default
+      - "25565:25565"          # public port → Velocity default
     volumes:
       - ./data/velocity/plugins:/server/plugins
       - ./data/velocity/config:/server         # toml files

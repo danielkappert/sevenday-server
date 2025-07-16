@@ -311,13 +311,33 @@ vite.config.ts.timestamp-*
 
 .env.dev
 
-.gradle/
-**/build/
+.gradle/**
+**/build/**
 
-docker/data/
+data/**
+!data/paper/config/**
+!data/velocity/config/**
 
+data/paper/plugins/**/*.jar
+data/paper/plugins/**/libs/
+data/paper/plugins/**/translations/
+data/paper/plugins/**/tmp-*/
+
+data/paper/world*/**
+data/paper/world_nether/**
+data/paper/world_the_end/**
+data/paper/cache/**
+data/paper/logs/**
+data/paper/versions/**
+data/paper/*_history.json
+data/paper/usercache.json
+data/paper/ops.json
+data/paper/banned-*.json
+
+.env*
 *~
+*.:Zone.Identifier
+.DS_Store
+Thumbs.db
 
-data/paper/plugins/*.jar
-
-data/paper/plugins/spark/tmp-client/
+forwarding.secret
