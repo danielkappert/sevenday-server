@@ -310,6 +310,7 @@ vite.config.ts.timestamp-*
 
 
 .env.dev
+.env
 
 .gradle/**
 **/build/**
