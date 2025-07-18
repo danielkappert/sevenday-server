@@ -1,5 +1,5 @@
 name: Claimstone
 main: com.sevenday.claimstone.ClaimstonePlugin
-version: ${project.version}
+version: ${projectVersion}
 api-version: "1.21"
 author: Sevenday
