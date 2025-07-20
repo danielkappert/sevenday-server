@@ -55,8 +55,10 @@ services:
       mariadb:
         condition: service_healthy
     command: -configFiles=/flyway/conf/flyway.conf migrate
-    environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    # environment:
+    #   FLYWAY_USER: ${FLYWAY_USER}
+    #   FLYWAY_PASS: ${FLYWAY_PASS}
+    #   MYSQL_DATABASE: ${MYSQL_DATABASE}
 
   redis:
     env_file: .env.dev
