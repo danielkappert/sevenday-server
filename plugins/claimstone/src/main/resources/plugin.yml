@@ -3,3 +3,8 @@ main: com.sevenday.claimstone.ClaimstonePlugin
 version: ${projectVersion}
 api-version: "1.21"
 author: Sevenday
+commands:
+  country:
+    description: country sub-commands
+    usage: /country <info|invite|members>
+    aliases: [ctry]
