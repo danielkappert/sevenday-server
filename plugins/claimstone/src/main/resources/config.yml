@@ -1,0 +1,6 @@
+database:
+  host: mariadb
+  port: 3306
+  name: sevenday
+  user: mc
+  pass: w$$klyDev!
