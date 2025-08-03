@@ -4,6 +4,7 @@ package com.sevenday.commons.db
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import org.jetbrains.exposed.sql.Database
+import java.sql.SQLException
 
 object DB {
 
@@ -20,14 +21,19 @@ object DB {
         jdbcUrlOverride: String? = null
     ) {
         val cfg = HikariConfig().apply {
-            jdbcUrl = jdbcUrlOverride
-                ?: "jdbc:mariadb://$host:$port/$db"
+            jdbcUrl = jdbcUrlOverride ?: "jdbc:mariadb://$host:$port/$db"
             username = user
             password = pass
             maximumPoolSize = poolSize
-            driverClassName = if (jdbcUrlOverride?.startsWith("jdbc:h2") == true)
-                "org.h2.Driver" else "org.mariadb.jdbc.Driver"
-            validate()
+            driverClassName = 
+                if (jdbcUrl.startsWith("jdbc:h2")) "org.h2.Driver" 
+                else "org.mariadb.jdbc.Driver"
+            try {
+                if (!jdbcUrl.startsWith("jdbc:h2"))
+                    validate ()
+            } catch (ex: SQLException) {
+
+            }
         }
         hikari = HikariDataSource(cfg)
         Database.connect(hikari)
