@@ -15,7 +15,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.update
 import org.jetbrains.exposed.sql.deleteWhere
 
-class ClaimstonePlugin : JavaPlugin() {
+open class ClaimstonePlugin : JavaPlugin() {
 
     override fun onEnable() {
         saveDefaultConfig()
