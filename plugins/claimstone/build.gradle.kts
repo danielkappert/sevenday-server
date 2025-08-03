@@ -21,6 +21,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
     testImplementation("com.github.seeseemelk:MockBukkit-v1.21:$mockBukkitVersion")
+    testRuntimeOnly("com.h2database:h2:2.2.224")
 }
 
 tasks.test {

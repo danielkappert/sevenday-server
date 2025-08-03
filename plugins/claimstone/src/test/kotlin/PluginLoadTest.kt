@@ -16,9 +16,12 @@ class PluginLoadTest {
             pass = ""
         )
 
-        MockBukkit.mock().use {
+        val server = MockBukkit.mock()
+        try {
             val plugin = MockBukkit.load(ClaimstonePlugin::class.java)
             assertNotNull(plugin, "Plugin failed to load")
+        } finally {
+            MockBukkit.unmock()
         }
     }
 }
