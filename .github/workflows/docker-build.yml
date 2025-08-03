@@ -1,0 +1,36 @@
+name: docker-build
+on:
+  push: { branches: [ develop, main ] }
+  pull_request: { branches: [ develop, main ] }
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Free Docker Buildx cache
+        uses: actions/cache@v4
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+
+      - name: Build Velocity image
+        run: docker build -t velocity:test docker/velocity
+
+      - name: Build Paper image
+        run: docker build -t paper:test docker/paper
+
+      - name: Tar images for download (optional)
+        run: |
+          docker save velocity:test | gzip > velocity-image.tar.gz
+          docker save paper:test    | gzip > paper-image.tar.gz
+
+      - name: Upload images
+        uses: actions/upload-artifact@v4
+        with:
+          name: dev-images
+          path: |
+            velocity-image.tar.gz
+            paper-image.tar.gz
