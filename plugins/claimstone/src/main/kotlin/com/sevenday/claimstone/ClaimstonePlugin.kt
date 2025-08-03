@@ -18,16 +18,18 @@ import org.jetbrains.exposed.sql.deleteWhere
 class ClaimstonePlugin : JavaPlugin() {
 
     override fun onEnable() {
-        // ---------- DB ----------
         saveDefaultConfig()
-        val cfg = config.getConfigurationSection("database")!!
-        DB.connect(
-            host = cfg.getString("host")!!,
-            port = cfg.getInt("port"),
-            db   = cfg.getString("name")!!,
-            user = cfg.getString("user")!!,
-            pass = cfg.getString("pass")!!
-        )
+
+        if (!DB.isConnected()) {
+            val cfg = config.getConfigurationSection("database")!!
+            DB.connect(
+                host = cfg.getString("host")!!,
+                port = cfg.getInt("port"),
+                db   = cfg.getString("name")!!,
+                user = cfg.getString("user")!!,
+                pass = cfg.getString("pass")!!
+            )
+        }
 
         // ---------- listeners & commands ----------
         server.pluginManager.registerEvents(BeaconListener(this), this)
